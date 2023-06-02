@@ -13,30 +13,32 @@ spec:
     spec:
       {{- if .Values.installer.releaseMirror.enabled }}
       hostAliases:
-      - ip: "127.0.0.1"
-        hostnames:
-        - "github.com"
+        - ip: "127.0.0.1"
+          hostnames:
+            - "github.com"
       {{- end }}
       containers:
         - name: istioctl-installer
           image: {{ template "system_default_registry" . }}{{ .Values.installer.repository }}:{{ .Values.installer.tag }}
           env:
-          - name: RELEASE_NAME
-            value: {{ .Release.Name }}
-          - name: ISTIO_NAMESPACE
-            value: {{ template "istio.namespace" . }}
-          - name: FORCE_INSTALL
-            value: {{ .Values.forceInstall | default "false" | quote }}
-          - name: RELEASE_MIRROR_ENABLED
-            value: {{ .Values.installer.releaseMirror.enabled | quote }}
-          - name: SECONDS_SLEEP
-            value: {{ .Values.installer.debug.secondsSleep | quote}}
+            - name: RELEASE_NAME
+              value: {{ .Release.Name }}
+            - name: ISTIO_NAMESPACE
+              value: {{ template "istio.namespace" . }}
+            - name: FORCE_INSTALL
+              value: {{ .Values.forceInstall | default "false" | quote }}
+            - name: FORCE_INSTALL_IPDT
+              value: {{ .Values.forceInstallIPDT | default "false" | quote }}
+            - name: RELEASE_MIRROR_ENABLED
+              value: {{ .Values.installer.releaseMirror.enabled | quote }}
+            - name: SECONDS_SLEEP
+              value: {{ .Values.installer.debug.secondsSleep | quote}}
           command: ["/bin/sh","-c"]
           args: ["/usr/local/app/scripts/run.sh"]
           volumeMounts:
-          - name: config-volume
-            mountPath: /app/istio-base.yaml
-            subPath: istio-base.yaml
+            - name: config-volume
+              mountPath: /app/istio-base.yaml
+              subPath: istio-base.yaml
           {{- if .Values.overlayFile }}
           - name: overlay-volume
             mountPath: /app/overlay-config.yaml
@@ -53,13 +55,13 @@ spec:
         {{- end }}
       serviceAccountName: istio-installer
       nodeSelector: {{ include "linux-node-selector" . | nindent 8 }}
-{{- if .Values.nodeSelector }}
-{{ toYaml .Values.nodeSelector | indent 8 }}
-{{- end }}
+  {{- if .Values.nodeSelector }}
+  {{ toYaml .Values.nodeSelector | indent 8 }}
+  {{- end }}
       tolerations: {{ include "linux-node-tolerations" . | nindent 8 }}
-{{- if .Values.tolerations }}
-{{ toYaml .Values.tolerations | indent 8 }}
-{{- end }}
+  {{- if .Values.tolerations }}
+  {{ toYaml .Values.tolerations | indent 8 }}
+  {{- end }}
       securityContext:
         runAsUser: 499
         runAsGroup: 487

@@ -5,7 +5,6 @@ metadata:
   labels:
     rbac.authorization.k8s.io/aggregate-to-admin: "true"
   name: istio-admin
-  namespace: {{ template "istio.namespace" . }}
 rules:
   - apiGroups:
       - config.istio.io

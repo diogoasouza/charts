@@ -4,8 +4,8 @@ tag: 1.17.2
 forceInstall: false
 
 installer:
-  repository: rancher/istio-installer
-  tag: 1.17.2-rancher1
+  repository: diogoasouza/rancher-installer
+  tag: 1.17.2-diogo
   ##releaseMirror are configurations for istio upgrades. 
   ##Setting releaseMirror.enabled: true will cause istio to use bundled in images from rancher/istio-installer to perfom an upgrade - this is ideal
   ##for airgap setups. Setting releaseMirror.enabled to false means istio will call externally to github to fetch the required assets.
@@ -14,7 +14,52 @@ installer:
       
   ##Set the secondsSleep to run a sleep command `sleep <secondsSleep>s` to allow time to exec into istio-installer pod for debugging
   debug:
-    secondsSleep: 0
+    secondsSleep: 20
+
+canary:
+  enabled: false
+
+legacy:
+  enabled: true
+  overlayFile: ""
+  forceInstallIPDT: true
+  tag: 1.16.3
+  pilot:
+    enabled: true
+    repository: rancher/mirrored-istio-pilot
+    # If you wish to troubleshoot Istio, you can switch to regular images by uncommenting the following tag and deleting
+    # the distroless tag:
+    # tag: 1.17.2
+    tag: 1.16.3-distroless
+    hpaSpec: { }
+    podDisruptionBudget: { }
+
+  installer:
+    repository: diogoasouza/rancher-installer
+    tag: 1.16.3-diogo3
+    ##releaseMirror are configurations for istio upgrades.
+    ##Setting releaseMirror.enabled: true will cause istio to use bundled in images from rancher/istio-installer to perfom an upgrade - this is ideal
+    ##for airgap setups. Setting releaseMirror.enabled to false means istio will call externally to github to fetch the required assets.
+    releaseMirror:
+      enabled: false
+
+    ##Set the secondsSleep to run a sleep command `sleep <secondsSleep>s` to allow time to exec into istio-installer pod for debugging
+    debug:
+      secondsSleep: 20
+  proxy:
+    repository: rancher/mirrored-istio-proxyv2
+    # If you wish to troubleshoot Istio, you can switch to regular images by uncommenting the following tag and deleting
+    # the distroless tag:
+    # tag: 1.17.2
+    tag: 1.16.3-distroless
+  proxy_init:
+    repository: rancher/mirrored-istio-proxyv2
+    # If you wish to troubleshoot Istio, you can switch to regular images by uncommenting the following tag and deleting
+    # the distroless tag:
+    # tag: 1.17.2
+    tag: 1.16.3-distroless
+  defaultPodDisruptionBudget:
+    enabled: true
 
 ##Native support for dns added in 1.8
 dns:
@@ -34,6 +79,7 @@ cni:
   excludeNamespaces:
   - istio-system
   - kube-system
+  - istio-system-legacy
 
 egressGateways:
   enabled: false

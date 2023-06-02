@@ -6,6 +6,9 @@ subjects:
 - kind: ServiceAccount
   name: istio-installer
   namespace: {{ template "istio.namespace" . }}
+- kind: ServiceAccount
+  name: istio-installer-legacy
+  namespace: {{ template "istio.namespace" . }}-legacy
 roleRef:
   kind: ClusterRole
   name: istio-installer

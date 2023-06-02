@@ -7,3 +7,23 @@ metadata:
 data:
   overlay-config.yaml: {{ toYaml .Values.overlayFile | indent 2 }}
 {{- end }}
+---
+{{- if and .Values.canary.overlayFile (eq .Values.canary.enabled true) }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: istio-installer-canary-overlay
+  namespace: {{ template "istio.namespace" . }}-canary
+data:
+  overlay-config.yaml: {{ toYaml .Values.canary.overlayFile | indent 4 }}
+{{- end }}
+---
+{{- if and .Values.legacy.overlayFile (eq .Values.legacy.enabled true) }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: istio-installer-legacy-overlay
+  namespace: {{ template "istio.namespace" . }}-legacy
+data:
+  overlay-config.yaml: {{ toYaml .Values.legacy.overlayFile | indent 4 }}
+{{- end }}

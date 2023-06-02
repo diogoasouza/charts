@@ -1,22 +1,11 @@
 apiVersion: install.istio.io/v1alpha1
 kind: IstioOperator
 metadata:
-  namespace: {{ template "istio.namespace" . }}
+  namespace: istio-system-legacy
 spec:
   components:
     base:
       enabled: {{ .Values.base.enabled }}
-    cni:
-      enabled: {{ .Values.cni.enabled }}
-      k8s:
-        nodeSelector: {{ include "linux-node-selector" . | nindent 12 }}
-{{- if .Values.nodeSelector }}
-{{- toYaml .Values.nodeSelector | nindent 12 }}
-{{- end }}
-        tolerations: {{ include "linux-node-tolerations" . | nindent 12 }}
-{{- if .Values.tolerations }}
-{{- toYaml .Values.tolerations | nindent 12 }}
-{{- end }}
     egressGateways:
     - enabled: {{ .Values.egressGateways.enabled }}
       name: istio-egressgateway
@@ -53,36 +42,16 @@ spec:
 {{- if .Values.tolerations }}
 {{- toYaml .Values.tolerations | nindent 12 }}
 {{- end }}
-        service:
-          ports:
-          - name: status-port
-            port: 15021
-            targetPort: 15021
-          - name: http2
-            port: 80
-            targetPort: 8080
-            nodePort: 31380
-          - name: https
-            port: 443
-            targetPort: 8443
-            nodePort: 31390
-          - name: tcp
-            port: 31400
-            targetPort: 31400
-            nodePort: 31400
-          - name: tls
-            port: 15443
-            targetPort: 15443
     istiodRemote:
       enabled: {{ .Values.istiodRemote.enabled }}
     pilot:
-      enabled: {{ .Values.pilot.enabled }}
+      enabled: {{ .Values.legacy.pilot.enabled }}
       k8s:
-      {{- if .Values.pilot.hpaSpec }}
-        hpaSpec: {{ toYaml .Values.pilot.hpaSpec | nindent 12 }}
+      {{- if .Values.legacy.pilot.hpaSpec }}
+        hpaSpec: {{ toYaml .Values.legacy.pilot.hpaSpec | nindent 12 }}
       {{- end }}
       {{- if .Values.pilot.podDisruptionBudget }}
-        podDisruptionBudget: {{ toYaml .Values.pilot.podDisruptionBudget | nindent 12 }}
+        podDisruptionBudget: {{ toYaml .Values.pilot.legacy.podDisruptionBudget | nindent 12 }}
       {{- end }}
         nodeSelector: {{ include "linux-node-selector" . | nindent 12 }}
 {{- if .Values.nodeSelector }}
@@ -94,13 +63,12 @@ spec:
 {{- end }}
   hub: {{ .Values.systemDefaultRegistry | default "docker.io" }}
   profile: default
-  tag: {{ .Values.tag }}
-  revision: {{ .Values.revision }}
+  tag: {{ .Values.legacy.tag }}
+  revision: legacy
   meshConfig:
     discoverySelectors:
-      - matchExpressions:
-          - { key: istio, operator: NotIn, values: [ legacy, canary ] }
-          - { key: istio, operator: DoesNotExist }
+      - matchLabels:
+          istio: legacy
     defaultConfig:
       proxyMetadata:
       {{- if .Values.dns.enabled }}
@@ -115,20 +83,20 @@ spec:
         name: istio-ingressgateway
         type: {{ .Values.ingressGateways.type }}
     global:
-      istioNamespace: {{ template "istio.namespace" . }}
+      istioNamespace: istio-system-legacy
       proxy:
-        image: {{ template "system_default_registry" . }}{{ .Values.global.proxy.repository }}:{{ .Values.global.proxy.tag }}
+        image: {{ template "system_default_registry" . }}{{ .Values.legacy.proxy.repository }}:{{ .Values.legacy.proxy.tag }}
       proxy_init:
-        image: {{ template "system_default_registry" . }}{{ .Values.global.proxy_init.repository }}:{{ .Values.global.proxy_init.tag }}
-      {{- if .Values.global.defaultPodDisruptionBudget.enabled }}
+        image: {{ template "system_default_registry" . }}{{ .Values.legacy.proxy_init.repository }}:{{ .Values.legacy.proxy_init.tag }}
+      {{- if .Values.legacy.defaultPodDisruptionBudget.enabled }}
       defaultPodDisruptionBudget:
-        enabled: {{ .Values.global.defaultPodDisruptionBudget.enabled }}
+        enabled: {{ .Values.legacy.defaultPodDisruptionBudget.enabled }}
       {{- end }}
-    {{- if .Values.pilot.enabled }}
+    {{- if .Values.legacy.pilot.enabled }}
     pilot:
       env:
         ENABLE_ENHANCED_RESOURCE_SCOPING: true
-      image: {{ template "system_default_registry" . }}{{ .Values.pilot.repository }}:{{ .Values.pilot.tag }}
+      image: {{ template "system_default_registry" . }}{{ .Values.legacy.pilot.repository }}:{{ .Values.legacy.pilot.tag }}
     {{- end }}
     telemetry:
       enabled: {{ .Values.telemetry.enabled }}
