@@ -4184,6 +4184,30 @@ entries:
     urls:
     - assets/neuvector-crd/neuvector-crd-100.0.0+up2.2.0.tgz
     version: 100.0.0+up2.2.0
+  panic:
+  - annotations:
+      catalog.cattle.io/certified: rancher
+      catalog.cattle.io/display-name: Panic
+      catalog.cattle.io/kube-version: '>= 1.23.0-0 < 1.27.0-0'
+      catalog.cattle.io/namespace: panic-test
+      catalog.cattle.io/os: linux
+      catalog.cattle.io/permits-os: linux,windows
+      catalog.cattle.io/rancher-version: '>= 2.7.0-0 < 2.8.0-0'
+      catalog.cattle.io/release-name: panic
+      catalog.cattle.io/requests-cpu: 710m
+      catalog.cattle.io/requests-memory: 2314Mi
+      catalog.cattle.io/type: cluster-tool
+      catalog.cattle.io/upstream-version: 0.0.0
+    apiVersion: v1
+    appVersion: 0.0.0
+    created: "2023-06-21T15:49:19.502404-03:00"
+    description: test
+    digest: 9752102899f19b8656dd08890a3219bca60de8c33af0954c0211b3fd2af532dd
+    icon: https://charts.rancher.io/assets/logos/istio.svg
+    name: panic
+    urls:
+    - assets/panic/panic-102.0.0+up0.0.2.tgz
+    version: 102.0.0+up0.0.2
   prometheus-federator:
   - annotations:
       catalog.cattle.io/certified: rancher
@@ -6729,7 +6753,7 @@ entries:
   - annotations:
       catalog.cattle.io/auto-install: rancher-eks-operator-crd=match
       catalog.cattle.io/certified: rancher
-      catalog.cattle.io/hidden: "true"
+      catalog.cattle.io/hidden: "false"
       catalog.cattle.io/kube-version: '>= 1.20.0-0 < 1.27.0-0'
       catalog.cattle.io/namespace: cattle-system
       catalog.cattle.io/os: linux
@@ -6740,9 +6764,9 @@ entries:
       catalog.cattle.io/scope: management
     apiVersion: v2
     appVersion: 1.2.1
-    created: "2023-05-24T07:15:25.81248011Z"
+    created: "2023-06-21T15:47:26.054045-03:00"
     description: A Helm chart for provisioning EKS clusters
-    digest: f0f398fb747f3719302902a679a40f02d59b41d765e320c24500a98117691773
+    digest: 3496a7c0d887394bdf876214e87d15ccea816ed86e255bea0f0ee02985df015e
     home: https://github.com/rancher/eks-operator
     name: rancher-eks-operator
     sources:
