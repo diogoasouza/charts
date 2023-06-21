@@ -16,4 +16,4 @@ appVersion: 0.0.3
 description: test
 icon: https://charts.rancher.io/assets/logos/istio.svg
 name: panic
-version: 0.0.5
+version: 102.0.5+up0.0.5
