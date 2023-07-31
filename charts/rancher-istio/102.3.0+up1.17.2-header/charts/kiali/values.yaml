@@ -24,7 +24,9 @@ web_root_override: true
 istio_namespace: "" # default is where Kiali is installed
 
 auth:
-  strategy: "token"
+  openid: {}
+  openshift: {}
+  strategy: "header"
 
 deployment:
   # This only limits what Kiali will attempt to see, but Kiali Service Account has permissions to see everything.

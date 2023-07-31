@@ -21,6 +21,7 @@ global:
   imagePullSecrets: []
   arch:
     amd64: 2
+    arm64: 2
     s390x: 2
     ppc64le: 2
   defaultNodeSelector:

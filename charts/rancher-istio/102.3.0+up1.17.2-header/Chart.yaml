@@ -21,4 +21,4 @@ keywords:
 - networking
 - infrastructure
 name: rancher-istio
-version: 102.2.4+up1.17.2
+version: 102.3.0+up1.17.2-header

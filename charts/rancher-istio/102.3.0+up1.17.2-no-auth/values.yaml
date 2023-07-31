@@ -89,7 +89,7 @@ global:
 kiali:
   enabled: true
   auth:
-    strategy: header
+    strategy: anonymous
   deployment:
     ingress_enabled: false
   external_services:

@@ -26,7 +26,7 @@ istio_namespace: "" # default is where Kiali is installed
 auth:
   openid: {}
   openshift: {}
-  strategy: ""
+  strategy: "openid"
 
 deployment:
   # This only limits what Kiali will attempt to see, but Kiali Service Account has permissions to see everything.
