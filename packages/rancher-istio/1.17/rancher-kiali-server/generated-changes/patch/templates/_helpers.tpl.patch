@@ -1,6 +1,6 @@
 --- charts-original/templates/_helpers.tpl
 +++ charts/templates/_helpers.tpl
-@@ -50,8 +50,15 @@
+@@ -50,9 +50,16 @@
  Selector labels
  */}}
  {{- define "kiali-server.selectorLabels" -}}
@@ -13,11 +13,12 @@
 +app.kubernetes.io/instance: {{ (get (($deployment).metadata.labels) "app.kubernetes.io/instance") | default $fullName }}
 +{{- else }}
 +app.kubernetes.io/instance: {{ $fullName }}
-+{{- end }}
  {{- end }}
++{{- end }}
  
  {{/*
-@@ -172,6 +179,29 @@
+ Determine the default login token signing key.
+@@ -172,7 +179,30 @@
  {{- end }}
  {{- end }}
  
@@ -29,7 +30,7 @@
 +{{- end -}}
 +{{- end -}}
 +
-+{{/*
+ {{/*
 +Windows cluster will add default taint for linux nodes,
 +add below linux tolerations to workloads could be scheduled to those linux nodes
 +*/}}
@@ -44,6 +45,7 @@
 +kubernetes.io/os: linux
 +{{- end -}}
 +
- {{/*
++{{/*
  Autodetect remote cluster secrets if enabled - looks for secrets in the same namespace where Kiali is installed.
  Returns a JSON dict whose keys are the cluster names and values are the cluster secret data.
+ */}}

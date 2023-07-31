@@ -10,7 +10,20 @@
  #
  # Settings that mimic the Kiali CR which are placed in the ConfigMap.
  # Note that only those values used by the Helm Chart will be here.
-@@ -42,10 +45,10 @@
+\ No newline at end of file
+@@ -21,9 +24,7 @@
+ istio_namespace: "" # default is where Kiali is installed
+ 
+ auth:
+-  openid: {}
+-  openshift: {}
+-  strategy: ""
++  strategy: "token"
+ 
+ deployment:
+   # This only limits what Kiali will attempt to see, but Kiali Service Account has permissions to see everything.
+\ No newline at end of file
+@@ -42,10 +43,10 @@
      api_version: "autoscaling/v2"
      spec: {}
    image_digest: "" # use "sha256" if image_version is a sha256 hash (do NOT prefix this value with a "@")
@@ -23,7 +36,8 @@
    ingress:
      additional_labels: {}
      class_name: "nginx"
-@@ -110,3 +113,13 @@
+\ No newline at end of file
+@@ -110,3 +111,13 @@
    metrics_enabled: true
    metrics_port: 9090
    web_root: ""
