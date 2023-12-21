@@ -113,12 +113,15 @@ server:
   metrics_port: 9090
   web_root: ""
 
+kubernetes_config:
+  cluster_name: local
+
 # Common settings used among istio subcharts.
 global:
   # Specify rancher clusterId of external tracing config
   # https://github.com/istio/istio.io/issues/4146#issuecomment-493543032
   cattle:
     systemDefaultRegistry: ""
-    clusterId:
+    clusterId: local
     psp:
       enabled: false
