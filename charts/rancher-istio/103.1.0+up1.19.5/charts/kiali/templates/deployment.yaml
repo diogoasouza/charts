@@ -9,7 +9,6 @@ metadata:
   annotations:
     "helm.sh/hook": post-install
     "helm.sh/hook-weight": "-4"
-    "helm.sh/hook-delete-policy": hook-succeeded
 spec:
   replicas: {{ .Values.deployment.replicas }}
   selector:
