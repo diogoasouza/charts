@@ -104,6 +104,9 @@ kiali_feature_flags:
   validations:
     ignore: ["KIA1301"]
 
+login_token:
+  signing_key: ""
+
 server:
   port: 20001
   metrics_enabled: true
