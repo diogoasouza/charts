@@ -68,7 +68,7 @@ Determine the default login token signing key.
 {{- if .Values.login_token.signing_key }}
   {{- .Values.login_token.signing_key }}
 {{- else }}
-  {{- randAlphaNum 16 }}
+  {{- "" }}
 {{- end }}
 {{- end }}
 
