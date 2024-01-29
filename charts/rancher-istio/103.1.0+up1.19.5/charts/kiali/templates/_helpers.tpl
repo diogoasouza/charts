@@ -65,7 +65,11 @@ app.kubernetes.io/instance: {{ $fullName }}
 Determine the default login token signing key.
 */}}
 {{- define "kiali-server.login_token.signing_key" -}}
+{{- if .Values.login_token.signing_key }}
   {{- .Values.login_token.signing_key }}
+{{- else }}
+  {{- randAlphaNum 16 }}
+{{- end }}
 {{- end }}
 
 {{/*
