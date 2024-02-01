@@ -10691,7 +10691,7 @@ entries:
       catalog.cattle.io/upstream-version: 1.19.6
     apiVersion: v1
     appVersion: 1.19.6
-    created: "2024-01-19T16:56:10.480502-03:00"
+    created: "2024-02-01T01:07:04.436065-03:00"
     dependencies:
     - condition: kiali.enabled
       name: kiali
@@ -10701,7 +10701,7 @@ entries:
       repository: file://./charts/tracing
     description: A basic Istio setup that installs with the istioctl. Refer to https://istio.io/latest/
       for details.
-    digest: dc7c3a644965fdf76804a4f105a3b4e67c64ce9a00aa3e2b1be333ea93e7f9b0
+    digest: 2c9978b72940a07d2eba1eb565b4b7fb513040b9814b7aace806fa10730d92d8
     icon: https://charts.rancher.io/assets/logos/istio.svg
     keywords:
     - networking
