@@ -17,6 +17,15 @@ validate:
 	@./scripts/pull-scripts
 	@./bin/charts-build-scripts validate $(if $(filter true,$(remote)),--remote) $(if $(filter true,$(local)),--local)
 
+prepare-cached: pull-scripts
+	@./bin/charts-build-scripts prepare --useCache
+
+patch-cached: pull-scripts
+	@./bin/charts-build-scripts patch --useCache
+
+charts-cached: pull-scripts
+	@./bin/charts-build-scripts charts --useCache
+
 chart-bump:
 	@if [ -z "$(package)" ] || [ -z "$(branch)" ] || [ -z "$(override)" ]; then \
 		echo "Error: package, branch and override arguments are required."; \
