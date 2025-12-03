@@ -92,8 +92,10 @@ rancher-logging-crd:
   - 108.0.0-rc.1+up4.10.0-rancher.15
   - 107.0.2+up4.10.0-rancher.15
 rancher-monitoring:
+  - 108.0.0-rc.4+up77.9.1-rancher.9
   - 108.0.0-rc.3+up77.9.1-rancher.6
 rancher-monitoring-crd:
+  - 108.0.0-rc.4+up77.9.1-rancher.9
   - 108.0.0-rc.3+up77.9.1-rancher.6
 rancher-provisioning-capi:
   - 108.0.0+up0.9.0
