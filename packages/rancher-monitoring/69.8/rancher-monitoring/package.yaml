@@ -1,11 +1,11 @@
 url: https://github.com/rancher/ob-team-charts.git
-subdirectory: charts/rancher-monitoring/69.8.2-rancher.23
-commit: fb72edc4778191a38853193bb0ddba779453e398
-version: 106.1.4
+subdirectory: charts/rancher-monitoring/69.8.2-rancher.27
+commit: 362ad30ac0791062f7957c586dc0c00147af395d
+version: 106.1.5-rc.1
 additionalCharts:
   - workingDir: charts-crd
     upstreamOptions:
       url: https://github.com/rancher/ob-team-charts.git
-      subdirectory: charts/rancher-monitoring-crd/69.8.2-rancher.23
-      commit: fb72edc4778191a38853193bb0ddba779453e398
+      subdirectory: charts/rancher-monitoring-crd/69.8.2-rancher.27
+      commit: 362ad30ac0791062f7957c586dc0c00147af395d
 doNotRelease: false
