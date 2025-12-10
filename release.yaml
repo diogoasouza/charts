@@ -43,3 +43,7 @@ rancher-webhook:
   - 107.0.0+up0.8.0-rc.6
   - 107.0.0+up0.8.0-rc.8
   - 107.0.0+up0.8.0-rc.9
+rancher-monitoring:
+  - 107.2.3-rc.1+up69.8.2-rancher.30
+rancher-monitoring-crd:
+  - 107.2.3-rc.1+up69.8.2-rancher.30
